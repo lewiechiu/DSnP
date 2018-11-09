@@ -1,0 +1,4 @@
+do dofiles/do6
+dbr tests/T10000.json
+dbp
+quit -f

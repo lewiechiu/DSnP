@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "*.tcc": "cpp",
+        "optional": "cpp",
+        "ostream": "cpp",
+        "iomanip": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "iosfwd": "cpp",
+        "new": "cpp",
+        "cassert": "cpp"
+    },
+    "workbench.panel.defaultLocation": "right",
+    "terminal.integrated.enableBell": true,
+    "terminal.explorerKind": "external"
+}

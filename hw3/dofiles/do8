@@ -1,0 +1,8 @@
+tests/T10000.json
+dbr tests/T10000.json
+dbp
+dbr tests/T1000.json
+db	p
+dbp xxl 342
+quit -f
+

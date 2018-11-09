@@ -1,0 +1,4 @@
+do dofiles/do2
+db  p
+do dofiles/do2
+quit -F
