@@ -17,7 +17,7 @@
 using namespace std;
 
 // Turn this on for debugging
-// #define MEM_DEBUG
+ #define MEM_DEBUG
 
 //--------------------------------------------------------------------------
 // Define MACROs
