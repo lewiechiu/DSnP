@@ -78,8 +78,49 @@ MTResetCmd::help() const
 CmdExecStatus
 MTNewCmd::exec(const string& option)
 {
-   // TODO
-
+  // TODO
+  string _opt = option;
+  while(_opt[0]==' ')
+  {_opt.erase(0,1);}
+  string nu = _opt.substr(0,_opt.find(' '));
+  int numObj = 0;
+  int arrayS = -1;
+  if(!myStr2Int(nu,numObj))
+  {
+    return CMD_EXEC_ERROR;
+  }
+  string token = "Aa";
+  _opt.erase(0,nu.length()+2);
+  if(myStrGetTok(_opt,token)!=string::npos)
+  {
+    string arrS = _opt.substr(myStrGetTok(_opt,token)+1,_opt.length());
+    //cout << arrS << endl;
+    if(!myStr2Int(arrS,arrayS))
+    {
+      return CMD_EXEC_ERROR;
+    }
+  }
+  if(arrayS>=0)
+  {
+    try
+    {
+      mtest.newArrs(numObj,arrayS);
+    }
+    catch(bad_alloc)
+    {
+    }
+  }
+  else
+  {
+    try
+    {
+      mtest.newObjs(numObj);
+    }
+    catch(bad_alloc)
+    {
+    }
+  }
+  
    // Use try-catch to catch the bad_alloc exception
    return CMD_EXEC_DONE;
 }
@@ -99,14 +140,39 @@ MTNewCmd::help() const
 
 
 //----------------------------------------------------------------------
-//    MTDelete <-Index (size_t objId) | -Random (size_t numRandId)> [-Array]
+//    MTDelete <  -Index (size_t objId) | -Random (size_t numRandId)> [-Array]
 //----------------------------------------------------------------------
 CmdExecStatus
 MTDeleteCmd::exec(const string& option)
 {
    // TODO
-
-   return CMD_EXEC_DONE;
+    string _opt = option;
+    while(_opt[0]==' ')
+    {_opt.erase(0,1);}
+    string token = "iI";
+    if(myStrGetTok(_opt,token)!= string::npos)
+    {
+      // -i
+      _opt.erase(0,myStrGetTok(_opt,token)+1);
+      #ifdef MEM_DEBUG
+      cout << _opt << endl;
+      #endif
+      int obj = 0;
+      if(myStr2Int(_opt,obj))
+      {
+        mtest.deleteObj(obj);
+        cout << "herer";
+      }
+      else
+      {
+        return CMD_EXEC_ERROR;
+      }
+    }
+    else
+    {
+      //this is for -Rr
+    }
+    return CMD_EXEC_DONE;
 }
 
 void
