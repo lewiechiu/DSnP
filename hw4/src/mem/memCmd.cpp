@@ -154,22 +154,32 @@ MTDeleteCmd::exec(const string& option)
     {
       // -i
       _opt.erase(0,myStrGetTok(_opt,token)+1);
-      #ifdef MEM_DEBUG
-      cout << _opt << endl;
-      #endif
-      int obj = 0;
-      if(myStr2Int(_opt,obj))
+      token = "Aa";
+      if(myStrGetTok(_opt, token)!= string::npos)
       {
-        mtest.deleteObj(obj);
-        cout << "herer";
+        // -Array
       }
       else
       {
-        return CMD_EXEC_ERROR;
+        // -objects
+        int obj = 0;
+        if(myStr2Int(_opt,obj))
+        {
+          mtest.deleteObj(obj);
+          
+        }
+        else
+        {
+          return CMD_EXEC_ERROR;
+        }
       }
+      
     }
     else
     {
+      //rnGen.operator();
+      //generate a number between  0 and
+//    (_objList or _arrList array size – 1).
       //this is for -Rr
     }
     return CMD_EXEC_DONE;
