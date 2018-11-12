@@ -383,7 +383,7 @@ private:
       size_t ans = t;
       if(t==S)
         return size_t(0);
-      ans = (t) / (S+8);
+      ans = (t) / (S);
       // TODO
       return ans;
    }
@@ -476,6 +476,15 @@ private:
         }
         else if(t != 56 && !this->_activeBlock->getMem(t,ret))
         {
+          if(this->_activeBlock->getRemainSize() >= S)
+          {
+            size_t WhereTo = this->getArraySize(this->_activeBlock->getRemainSize());
+            T* toPush ;
+            this->_activeBlock->getMem(this->_activeBlock->getRemainSize(),toPush);
+            this->_recycleList[WhereTo].pushFront(toPush);
+          }
+          
+
           MemBlock<T> *tmp = new MemBlock<T>(nullptr,this->_blockSize);
           tmp->_nextBlock = this->_activeBlock;
           this->_activeBlock = tmp;
@@ -484,10 +493,7 @@ private:
           cout << "New MemBlock... " << this->_activeBlock << endl;
           #endif 
           this->_activeBlock->getMem(t,ret);
-          size_t WhereTo = this->getArraySize(this->_activeBlock->getRemainSize());
-          T* toPush ;
-          this->_activeBlock->getMem(this->_activeBlock->getRemainSize(),toPush);
-          this->_recycleList[WhereTo].pushFront(toPush);
+          
         }
         // if the above condition is true
         // then it will be here
