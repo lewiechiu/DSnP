@@ -19,7 +19,7 @@ using namespace std;
 
 // Turn this on for debugging
 
-#define MEM_DEBUG
+//#define MEM_DEBUG
 
 //--------------------------------------------------------------------------
 // Define MACROs
@@ -100,10 +100,6 @@ class MemBlock
       // #endif
       ret = (T*)_ptr;
       _ptr += toSizeT(t);
-      #ifdef MEM_DEBUG
-      cout << "t: " << t << endl;
-      cout << "returned _ptr address: " << ret << endl;
-      #endif
       
       return true;
    }
@@ -138,15 +134,22 @@ class MemRecycleList
    // pop out the first element in the recycle list
    T* popFront() {
       if(_first == nullptr)
+      {
+        //  #ifdef MEM_DEBUG
+        // cout << "next address: " << _first << endl;
+        // #endif
         return nullptr;
+      }
+        
       size_t* PTR  = (size_t*)_first;
       T* _toReturn = _first;
       _first = (T*)*PTR;
-
-      #ifdef MEM_DEBUG
-      cout << "_first address: " << _toReturn << endl;
-      cout << "next address: " << _first << endl;
-      #endif
+      if(_first == 0)
+        _first = nullptr;
+      // #ifdef MEM_DEBUG
+      // cout << "_first address: " << _toReturn << endl;
+      // cout << "next address: " << _first << endl;
+      // #endif
       // TODOCOmplete
 
       return _toReturn;
@@ -166,49 +169,13 @@ class MemRecycleList
     MemRecycleList<T>* curblock = this->_nextList;
     while(curblock!=nullptr)
     {
-      T* PTR = curblock->popFront();
-      MemRecycleList<T>* _del = curblock;
-      
-      #ifdef MEM_DEBUG
-      cout << "memrecycle list address : " << curblock << " item: " << PTR << endl;
-      cout << "getNext: " << curblock->getNextList() << endl;
-      #endif
-
-      T* toDelete = PTR;
-      while(PTR!=nullptr)
-      {
-        toDelete = PTR;
-        #ifdef MEM_DEBUG
-        cout << " item: " << PTR << endl;
-        #endif
-        PTR = curblock->popFront();
-        delete toDelete; 
-      }
+      curblock->_first = nullptr;
       curblock = curblock->getNextList();
-      
-      delete _del;
-      #ifdef MEM_DEBUG
-      cout << "next list address : " << curblock << endl;
-      #endif
     }
-
-
     // Process yourself
-    T* PTR = this->popFront();
-    T* toDelete = PTR;
-    while(PTR!=nullptr)
-    {
-      toDelete = PTR;
-      #ifdef MEM_DEBUG
-      cout << "item: " << PTR << endl;
-      #endif
-      PTR = curblock->popFront();
-      delete toDelete; 
-    }
-    
+    this->_first = nullptr;
     // Supposedly, we have to break up the chains between each block.
     // TODO
-      
    }
 
    // Helper functions
@@ -291,9 +258,6 @@ public:
       int i =0;
       while(i<R_SIZE)
       {
-        #ifdef MEM_DEBUG
-        cout << "clearing _recylist[" << i << "]" << endl;
-        #endif // MEM_DEBUG
         this->_recycleList[i].reset();
         i++;
       }
@@ -330,13 +294,13 @@ public:
       // TODO
       // Get the array size 'n' stored by system,
       // which is also the _recycleList index
-      size_t n = this->getArraySize(n);
+      size_t* n = (size_t*)p;
       #ifdef MEM_DEBUG
-      cout << ">> Array size = " << n << endl;
-      cout << "Recycling " << p << " to _recycleList[" << n << "]" << endl;
+      cout << ">> Array size = " << *n << endl;
+      cout << "Recycling " << p << " to _recycleList[" << *n << "]" << endl;
       #endif // MEM_DEBUG
       // add to recycle list...
-      getMemRecycleList(n)->pushFront(p);
+      getMemRecycleList(*n)->pushFront(p);
    }
    void print() const {
       cout << "=========================================" << endl
@@ -380,12 +344,12 @@ private:
    size_t getArraySize(size_t t) const {
       assert(t % SIZE_T == 0);
       assert(t >= S);
-      size_t ans = t;
+      int ans = t;
       if(t==S)
         return size_t(0);
-      ans = (t) / (S);
+      ans = (t - 8) / (S);
       // TODO
-      return ans;
+      return size_t(ans);
    }
    // Go through _recycleList[m], its _nextList, and _nexList->_nextList, etc,
    //    to find a recycle list whose "_arrSize" == "n"
@@ -420,11 +384,15 @@ private:
         prevPoint = pointer;
         pointer = pointer->_nextList;
       }
-      prevPoint = new MemRecycleList<T>(n);
+      pointer = new MemRecycleList<T>(n);
+      pointer->_nextList = nullptr;
+      pointer->_arrSize = n;
+      prevPoint->_nextList = pointer;
+      
       // #ifdef MEM_DEBUG
       // cout << "prevPointer: " << prevPoint << endl;
       // #endif
-      return prevPoint;
+      return pointer;
    }
    // t is the #Bytes requested from new or new[]
    // Note: Make sure the returned memory is a multiple of SIZE_T
@@ -438,13 +406,12 @@ private:
       // 2. Check if the requested memory is greater than the block size.
       //    If so, throw a "bad_alloc()" exception.
       //    Print this message for exception
-      //    cerr << "Requested memory (" << t << ") is greater than block size"
-      //         << "(" << _blockSize << "). " << "Exception raised...\n";
+      
       // TODO
       if(t > this->_blockSize)
       {
-        cerr << "Requested memory (" << t << ") is greater than block size"
-             << "(" << _blockSize << "). " << "Exception raised...\n";
+           cerr << "Requested memory (" << t << ") is greater than block size"
+              << "(" << _blockSize << "). " << "Exception raised...\n";
         throw (bad_alloc());
       }
 
@@ -456,35 +423,26 @@ private:
       size_t n = getArraySize(t);
       
       ret = this->getMemRecycleList(n)->_first;
-      #ifdef MEM_DEBUG
-      cout << "n: " << n << endl;
-      cout << "ret:" << ret << endl;
-      #endif
       // TODO
       if(ret == nullptr)
       {
-        if(!this->_activeBlock->getMem(t,ret) && t ==56)
+        if(this->_activeBlock->getMem(t,ret))
+        {}
+        else
         {
-          MemBlock<T> *tmp = new MemBlock<T>(nullptr,this->_blockSize);
-          tmp->_nextBlock = this->_activeBlock;
-          this->_activeBlock = tmp;
-          //    ==> allocate a new memory block, and print out ---
-          #ifdef MEM_DEBUG
-          cout << "New MemBlock... " << this->_activeBlock << endl;
-          #endif 
-          this->_activeBlock->getMem(t,ret);
-        }
-        else if(t != 56 && !this->_activeBlock->getMem(t,ret))
-        {
-          if(this->_activeBlock->getRemainSize() >= S)
+          if(n!=0)
           {
-            size_t WhereTo = this->getArraySize(this->_activeBlock->getRemainSize());
-            T* toPush ;
-            this->_activeBlock->getMem(this->_activeBlock->getRemainSize(),toPush);
-            this->_recycleList[WhereTo].pushFront(toPush);
+            if(this->_activeBlock->getRemainSize() >=S )
+            {
+              size_t WhereTo = this->getArraySize(this->_activeBlock->getRemainSize());
+              T* toPush ;
+              this->_activeBlock->getMem(this->_activeBlock->getRemainSize(),toPush);
+              this->getMemRecycleList(WhereTo)->pushFront(toPush);
+              #ifdef MEM_DEBUG
+              cout << "Recycling " << toPush << " to _recycleList[" << WhereTo << "]" << endl;
+              #endif // MEM_DEBUG
+            }
           }
-          
-
           MemBlock<T> *tmp = new MemBlock<T>(nullptr,this->_blockSize);
           tmp->_nextBlock = this->_activeBlock;
           this->_activeBlock = tmp;
@@ -493,15 +451,13 @@ private:
           cout << "New MemBlock... " << this->_activeBlock << endl;
           #endif 
           this->_activeBlock->getMem(t,ret);
-          
         }
-        // if the above condition is true
-        // then it will be here
-        // We don't need to handle it here
       }
       else
       {
-        //ret is acquired from recycle list, should I pop it out for memrecycle?
+        #ifdef MEM_DEBUG
+        cout << "Recycled from _recycleList[" << n << "]..." << ret << endl;
+        #endif // MEM_DEBUG
         ret = this->getMemRecycleList(n)->popFront();
       }
       // If no match from recycle list...
@@ -510,9 +466,7 @@ private:
       //    Note: recycle to the as biggest array index as possible
       //    Note: rn is the array size
       //    Print this message for memTest.debug
-    //  #ifdef MEM_DEBUG
-    //   cout << "Recycled from _recycleList[" << n << "]..." << ret << endl;
-    //   #endif // MEM_DEBUG
+    
       
       // TODO
 

@@ -82,46 +82,102 @@ MTNewCmd::exec(const string& option)
   string _opt = option;
   while(_opt[0]==' ')
   {_opt.erase(0,1);}
+  int spaceCnt = 0;
+  string firstP, SecP, ThirdP;
+  while(_opt.find(' ')!=string::npos)
+  {
+    _opt[_opt.find(' ')] = '*';
+    spaceCnt++;
+  }
   string nu = _opt.substr(0,_opt.find(' '));
   int numObj = 0;
   int arrayS = -1;
-  if(!myStr2Int(nu,numObj))
+  if(spaceCnt == 2)
   {
-    return CMD_EXEC_ERROR;
-  }
-  string token = "Aa";
-  _opt.erase(0,nu.length()+2);
-  if(myStrGetTok(_opt,token)!=string::npos)
-  {
-    string arrS = _opt.substr(myStrGetTok(_opt,token)+1,_opt.length());
-    //cout << arrS << endl;
-    if(!myStr2Int(arrS,arrayS))
+    firstP = _opt.substr(0,_opt.find('*'));
+    _opt.erase(0,firstP.length()+1);
+    SecP = _opt.substr(0,_opt.find('*'));
+    _opt.erase(0,SecP.length()+1);
+    ThirdP = _opt;
+    string token = "Aa";
+    if(firstP.find_first_of(token)!=string::npos)
     {
+      // -a 2 100   100 * size2 arry
+      if(!myStr2Int(SecP,arrayS) || !myStr2Int(ThirdP,numObj))
+      {
+        if(!myStr2Int(SecP,arrayS))
+          cerr << "Error: Illegal option!! (" << SecP << ")" << endl;
+        else
+          cerr << "Error: Illegal option!! (" << ThirdP << ")" << endl;
+        return CMD_EXEC_ERROR;
+      }
+      if(arrayS<=0 || numObj <= 0)
+      {
+        if(arrayS <= 0)
+          cerr << "Error: Illegal option!! (" << arrayS << ")" << endl;
+        else
+          cerr << "Error: Illegal option!! (" << numObj << ")" << endl;
+        return CMD_EXEC_ERROR;
+      }
+    }
+    else if(SecP.find_first_of(token)!=string::npos)
+    {
+      // 100 -a 2
+      if(!myStr2Int(firstP,numObj) || !myStr2Int(ThirdP,arrayS))
+      {
+        if(!myStr2Int(firstP,arrayS))
+          cerr << "Error: Illegal option!! (" << firstP << ")" << endl;
+        else
+          cerr << "Error: Illegal option!! (" << ThirdP << ")" << endl;
+        return CMD_EXEC_ERROR;
+      }
+      if(arrayS<=0 || numObj <= 0)
+      {
+        if(arrayS <= 0)
+          cerr << "Error: Illegal option!! (" << arrayS << ")" << endl;
+        else
+          cerr << "Error: Illegal option!! (" << numObj << ")" << endl;
+        return CMD_EXEC_ERROR;
+      }
+    }
+    else
+    {
+      cerr << "Error: Extra option!! (" << SecP << ")" << endl;
       return CMD_EXEC_ERROR;
     }
-  }
-  if(arrayS>=0)
-  {
     try
     {
       mtest.newArrs(numObj,arrayS);
     }
     catch(bad_alloc)
     {
+      return CMD_EXEC_ERROR;
     }
   }
-  else
+  else if(spaceCnt == 0)
   {
+    if(!myStr2Int(_opt,numObj))
+    {
+      return CMD_EXEC_ERROR;
+    }
+    if(numObj<=0)
+    {
+      cerr << "Error: Illegal option!! (" << numObj << ")" << endl;
+      return CMD_EXEC_ERROR;
+    }
     try
     {
       mtest.newObjs(numObj);
     }
     catch(bad_alloc)
     {
+      return CMD_EXEC_ERROR;
     }
   }
-  
-   // Use try-catch to catch the bad_alloc exception
+  else
+  {
+    return CMD_EXEC_ERROR;
+  }
    return CMD_EXEC_DONE;
 }
 
@@ -145,43 +201,156 @@ MTNewCmd::help() const
 CmdExecStatus
 MTDeleteCmd::exec(const string& option)
 {
-   // TODO
-    string _opt = option;
-    while(_opt[0]==' ')
-    {_opt.erase(0,1);}
-    string token = "iI";
-    if(myStrGetTok(_opt,token)!= string::npos)
+  string _opt = option;
+  while(_opt[0]==' ')
+  {_opt.erase(0,1);}
+  int spaceCnt = 0;
+  string tokeni = "iI";
+  string tokenr = "rR";
+  string tokena = "Aa";
+  string firstP, SecP, ThirdP;
+  while(_opt.find(' ')!=string::npos)
+  {
+    _opt[_opt.find(' ')] = '*';
+    spaceCnt++;
+  }
+  string nu = _opt.substr(0,_opt.find(' '));
+  int numObj = -1;
+  int arrayS = -1;
+  if(spaceCnt == 1)
+  {
+    //it must be -i()# or -r()#
+    firstP = _opt.substr(0,_opt.find('*'));
+    _opt.erase(0,firstP.length()+1);
+    SecP = _opt;
+    //cout << SecP << endl;
+    if(firstP.find_first_of(tokeni)!=string::npos)
     {
-      // -i
-      _opt.erase(0,myStrGetTok(_opt,token)+1);
-      token = "Aa";
-      if(myStrGetTok(_opt, token)!= string::npos)
+      // -i 
+      if(myStr2Int(SecP,numObj))
       {
-        // -Array
-      }
-      else
-      {
-        // -objects
-        int obj = 0;
-        if(myStr2Int(_opt,obj))
+        if(numObj>=0 && numObj <= mtest.getObjListSize())
         {
-          mtest.deleteObj(obj);
-          
+          mtest.deleteObj(numObj);
+        }
+        else
+          return CMD_EXEC_ERROR;
+      }
+    }
+    else if(firstP.find_first_of(tokenr)!=string::npos)
+    {
+      // -r () #
+      if(myStr2Int(SecP,numObj))
+      {
+        for(int i=0;i<numObj;i++)
+        {
+          mtest.deleteObj(rnGen(mtest.getObjListSize()));
+        }
+      
+      }
+    }
+    
+  }
+  else if(spaceCnt == 2)
+  {
+    firstP = _opt.substr(0,_opt.find('*'));
+    _opt.erase(0,firstP.length()+1);
+    SecP = _opt.substr(0,_opt.find('*'));
+    _opt.erase(0,SecP.length()+1);
+    ThirdP = _opt;
+    
+    if(SecP.find_first_of(tokeni)!=string::npos)
+    {
+      // check the case // -a () -i () #
+      if(firstP.find_first_of(tokena)==string::npos)
+      {
+        return CMD_EXEC_ERROR;
+      }
+      if(myStr2Int(ThirdP,numObj))
+      {
+        //cout << mtest.getArrListSize() << endl;
+        //cout << numObj << endl;
+        if(numObj >=0 &&(numObj <=(mtest.getArrListSize())))
+        {
+          cout << mtest.getArrListSize() << endl;
+          cout << numObj << endl;
+          mtest.deleteArr(numObj);
         }
         else
         {
           return CMD_EXEC_ERROR;
         }
       }
-      
+      else
+        return CMD_EXEC_ERROR;
     }
-    else
+    else if(SecP.find_first_of(tokenr)!=string::npos)
     {
-      //rnGen.operator();
-      //generate a number between  0 and
-//    (_objList or _arrList array size – 1).
-      //this is for -Rr
+      // check the case -a () -r () #
+      if(firstP.find_first_of(tokena)==string::npos)
+      {
+        return CMD_EXEC_ERROR;
+      }
+      if(myStr2Int(ThirdP,numObj))
+      {
+        
+        for(int i=0;i<numObj;i++)
+        {
+          if(mtest.getArrListSize()==0)
+            return CMD_EXEC_ERROR;
+          mtest.deleteArr(rnGen(mtest.getArrListSize()));
+        }
+      }
+      else
+        return CMD_EXEC_ERROR;
     }
+    else if(firstP.find_first_of(tokeni)!=string::npos)
+    {
+      // check the case // -i () # () -a
+      if(ThirdP.find_first_of(tokena)==string::npos)
+      {
+        return CMD_EXEC_ERROR;
+      }
+      if(myStr2Int(SecP,numObj))
+      {
+        
+        if(numObj >=0 && numObj <=mtest.getArrListSize())
+        {
+          mtest.deleteArr(numObj);
+        }
+      }
+      else
+        return CMD_EXEC_ERROR;
+    }
+    else if(firstP.find_first_of(tokenr)!=string::npos)
+    {
+      // check the case  // -r () # () -a
+      if(ThirdP.find_first_of(tokena)==string::npos)
+      {
+        return CMD_EXEC_ERROR;
+      }
+      if(myStr2Int(SecP,numObj))
+      {
+        
+        
+        for(int i=0;i<numObj;i++)
+        {
+          if(mtest.getArrListSize()==0)
+            return CMD_EXEC_ERROR;
+          mtest.deleteArr(rnGen(mtest.getArrListSize()));
+          //cout << numObj << endl;
+        }
+      }
+      else
+        return CMD_EXEC_ERROR;
+    }
+  }
+  else
+  {
+    return CMD_EXEC_ERROR;
+  }
+
+
     return CMD_EXEC_DONE;
 }
 
