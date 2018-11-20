@@ -226,15 +226,22 @@ MTDeleteCmd::exec(const string& option)
     //cout << SecP << endl;
     if(firstP.find_first_of(tokeni)!=string::npos)
     {
-      // -i 
+      // -i () #
       if(myStr2Int(SecP,numObj))
       {
-        if(numObj>=0 && numObj <= mtest.getObjListSize())
+        if(numObj>=0 && numObj < mtest.getObjListSize())
         {
           mtest.deleteObj(numObj);
         }
         else
+        {
+          if(numObj > mtest.getObjListSize())
+            cerr << "Size of object list (" << mtest.getObjListSize() <<  ") is <= " << numObj <<"!!" << endl;
+          else if(numObj<0)
+            cerr << "Error: Illegal option!! (" << numObj << ")" << endl;
           return CMD_EXEC_ERROR;
+        }
+          
       }
     }
     else if(firstP.find_first_of(tokenr)!=string::npos)
@@ -244,9 +251,18 @@ MTDeleteCmd::exec(const string& option)
       {
         for(int i=0;i<numObj;i++)
         {
+          if(mtest.getObjListSize()==0)
+            return CMD_EXEC_ERROR;
           mtest.deleteObj(rnGen(mtest.getObjListSize()));
         }
       
+      }
+      else
+      {
+        
+        cerr << "Error: Illegal option!! (" << SecP << ")" << endl;
+        return CMD_EXEC_ERROR;
+
       }
     }
     
@@ -264,16 +280,15 @@ MTDeleteCmd::exec(const string& option)
       // check the case // -a () -i () #
       if(firstP.find_first_of(tokena)==string::npos)
       {
+        cerr << "Error: Illegal option!! (" << firstP << ")" << endl;
         return CMD_EXEC_ERROR;
       }
       if(myStr2Int(ThirdP,numObj))
       {
         //cout << mtest.getArrListSize() << endl;
         //cout << numObj << endl;
-        if(numObj >=0 &&(numObj <=(mtest.getArrListSize())))
+        if(numObj >=0 &&(numObj <(mtest.getArrListSize())))
         {
-          cout << mtest.getArrListSize() << endl;
-          cout << numObj << endl;
           mtest.deleteArr(numObj);
         }
         else
@@ -314,7 +329,7 @@ MTDeleteCmd::exec(const string& option)
       if(myStr2Int(SecP,numObj))
       {
         
-        if(numObj >=0 && numObj <=mtest.getArrListSize())
+        if(numObj >=0 && numObj <mtest.getArrListSize())
         {
           mtest.deleteArr(numObj);
         }
