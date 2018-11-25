@@ -22,4 +22,6 @@ echo "==="
 echo do5
 echo "==="
 $1 -f tests/do5
-
+echo do6
+echo "==="
+$1 -f tests/do6

@@ -1,0 +1,5 @@
+adta -r 100
+adtp
+adtd -r 20
+adtp
+q -f
