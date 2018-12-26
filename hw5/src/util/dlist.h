@@ -82,32 +82,14 @@ public:
 
    void push_back(const T& x) 
    {
-      
-//      cout << this->_size << endl;
-      
       DListNode<T> *post = this->_head;
       DListNode<T> *prev = this->_head->_prev;
       DListNode<T> *ins = new DListNode<T>(x,prev,post);
       post->_prev = ins;
       prev->_next = ins;
 
-      #ifdef DEBUG
-         cout << x << endl;
-         cout << "post prev: " << post->_prev << endl;
-         cout << "prev next: " << prev->_next << endl;
-         cout << "post: " << post << endl;
-         cout << "prev: " << prev << endl;
-         cout << "ins: " << ins << endl;
-         DListNode<T> *ptr = this->_head->_next;
-         cout << "inside list :" << endl;
-         while(ptr!=this->_head)
-         {
-            cout << ptr->_data << endl;
-            ptr = ptr->_next;
-         }
-      #endif
-
       this->_size++;
+      _isSorted = false;
       return;
       
    }
@@ -144,28 +126,16 @@ public:
    {
       if(_size == 0)
          return false;
-
-      iterator ptr = begin();
-      while(ptr!=end())
-      {
-         if(*ptr == *pos)
-         {
-            
-            DListNode<T> *tod = ptr._node;
-            
-            DListNode<T> *prev = tod->_prev;
-            DListNode<T> *post = tod->_next;
-            
-            prev->_next = post;
-            post->_prev = prev;
-            this->_size--;
-            delete tod;
-            return true;
-            
-         }
-         ptr++;
-      }
-      return false;
+      DListNode<T> *tod = pos._node;
+      
+      DListNode<T> *prev = tod->_prev;
+      DListNode<T> *post = tod->_next;
+      
+      prev->_next = post;
+      post->_prev = prev;
+      this->_size--;
+      delete tod;
+      return true;
    }
    bool erase(const T& x) 
    {
@@ -218,8 +188,11 @@ public:
 
    void sort() const 
    {
-      vector<T> tmp;
       
+      if(!_isSorted)
+         _quickSort(_head->_next,_head->_prev);
+      
+      _isSorted = true;
    }
 
 private:
@@ -228,6 +201,40 @@ private:
    mutable bool   _isSorted; // (optionally) to indicate the array is sorted
    size_t _size;
    // [OPTIONAL TODO] helper functions; called by public member functions
+   
+   DListNode<T>* partition(DListNode<T> *l, DListNode<T> *h) const
+   {
+      DListNode<T> *i = l->_prev; 
+      for (DListNode<T> *j = l; j != h; j = j->_next) 
+      { 
+         if (j->_data <= h->_data) 
+         { 
+               
+               i = (i == NULL)? l : i->_next; 
+   
+               ::swap((i->_data), (j->_data)); 
+         } 
+      } 
+      if(i==NULL)
+         i = l;
+      else
+         i = i->_next;
+      ::swap((i->_data), (h->_data)); 
+      return i; 
+   } 
+   void _quickSort(DListNode<T>* l, DListNode<T> *h) const
+   { 
+      if (h != NULL && l != h && l != h->_next) 
+      { 
+         DListNode<T> *p = partition(l, h); 
+         _quickSort(l, p->_prev); 
+         _quickSort(p->_next, h); 
+      } 
+   } 
+
 };
+
+
+
 
 #endif // DLIST_H

@@ -12,26 +12,28 @@ using namespace std;
 //p(r) prob of rest
 //the following are in x%
 //so type whatever x you want
-#define pd 35
-#define pdr 10000
-#define pda 100000
-#define pa 50
-#define ps 10
-#define pr 5
-#define ppi 30
-#define cases 1000
-#define adtr 70
+#define pd 50
+#define pdr 50
+#define pda 700
+#define pa 65
+#define ps 20
+#define pr 40
+#define ppi 10
+#define cases 1500
+#define adtr 5
 
 //print out occurs every 10 lines
-#define print out << "adtp" << endl << "adtp -r" << endl
+#define print out << "adtp" << endl
 
 
 int main()
 {
     RandomNumGen rn;
+    size_t len = 3;
     ofstream out("tests//td1");
     for(int i=0;i<cases;i++)
     {
+        
         int randN = rn(pa + pd + ps + pr + ppi);
         if(randN < pd)
         {
@@ -45,7 +47,23 @@ int main()
         }
         else if(pd < randN && randN  < pa+pd)
         {
-            out << "adta -r " << rn(pda) << endl;
+            int nums = rn(pda);
+            if(rn(100) > 65)
+                out << "adta -r " << nums << endl;
+            else
+            {
+                for(int j=0;j<nums;j++)
+                {
+                    string toadd;
+                    toadd.resize(len);
+                    for (int i = 0; i < len; ++i)
+                        toadd[i] = 'a' + rn(26);
+                    out << "adta -s " << toadd << endl;
+                }
+                
+            }
+            
+            
         }
         else if(pa+pd < randN && randN < pa + pd + ps)
         {
@@ -53,12 +71,19 @@ int main()
         }
         else if(pa + pd + ps < randN && randN < pa + pd + ps + pr)
         {
-            out << "adtr " << rn(adtr) << endl;
+            string toadd;
+            toadd.resize(len);
+            for (int i = 0; i < len; ++i)
+                toadd[i] = 'a' + rn(26);
+            out << "adtq " << toadd << endl;
         }
         else if(pa + pd + ps + pr < randN && randN < pa + pd + ps + pr + ppi)
-            out << "adtp -i " << rn(pda) << endl;
-        if(i % 10 == 0)
+            out << "adtp " << rn(pda) << endl;
+        if(i % 20 == 0)
             print;
     }
+    out << "usage" << endl;
+    out << "q -f " << endl;
+    out.close();
     return 0;
 }

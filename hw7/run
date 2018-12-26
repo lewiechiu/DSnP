@@ -1,0 +1,12 @@
+echo "running ref"
+echo "==========================="
+./ref/taskMgr-linux18 -f do1 > a
+
+echo "running Lewie"
+echo "============="
+./taskMgr -f do1 > m
+
+echo "diff part"
+echo "============="
+colordiff m a > d
+

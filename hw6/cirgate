@@ -1,0 +1,30 @@
+cirread tre.aag
+cirp -netlist
+
+cirg 1354 -fanout 28
+cirg 1354 -fanout 27
+cirg 1354 -fanout 26
+cirg 1354 -fanout 25
+cirg 1354 -fanout 24
+cirg 1354 -fanout 23
+cirg 1354 -fanout 22
+cirg 1354 -fanout 21
+cirg 1354 -fanout 20
+cirg 1354 -fanout 19
+cirg 1354 -fanout 18
+cirg 1354 -fanout 17
+cirg 1354 -fanout 16
+cirg 1354 -fanout 15
+cirg 1354 -fanout 14
+cirg 1354 -fanout 13
+cirg 1354 -fanout 12
+cirg 1354 -fanout 11
+cirg 1354 -fanout 10
+cirg 1354 -fanout 9
+cirg 1354 -fanout 8
+cirg 1354 -fanout 7
+cirg 1354 -fanout 6
+cirg 1354 -fanout 5
+cirg 1354 -fanout 4
+cirg 1354 -fanout 3
+cirg 34028 -fanin 3

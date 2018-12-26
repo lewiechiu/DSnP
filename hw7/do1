@@ -1,0 +1,60 @@
+
+taskinit 10
+tasknew -r 50000
+taskq -hash
+
+usage
+tasknew -r 10000
+taskass 2500 -r 5434
+tasknew -r 19857
+usage
+taskass 65443 -r 9883
+tasknew -r 234
+taskass 89003 -r 9800
+usage
+tasknew -r 1
+taskass 1 -r 9800
+tasknew -r 234
+taskass 2341 -r 4512
+!--- random
+do shuffleN.m
+
+taskquery -hash
+!--- from beyond
+usage
+taskquery -heap
+
+usage
+q -f
+tasknew -r 500
+do dofiles/do1
+!-do1 done
+do dofiles/do3
+!-do3 done
+do dofiles/do2
+taskquery -heap
+
+
+taskassign 1000000 -r 20
+taskquery -hash
+tasknew -n axcv 12334
+taskremove -r 34
+tasknew -r 500
+
+taskassign 1000000 -r 20
+tasknew -n bxcv 12334
+taskremove -r 20000
+
+taskquery -hash
+
+
+taskassign 1000000 -r 20
+
+
+taskremove -n rpotwh
+taskremove -n znbtwe
+taskquery znbtwe
+taskquery -mini
+tasknew -n bxcv 645
+taskquery -heap
+q -f

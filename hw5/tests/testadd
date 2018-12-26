@@ -1,0 +1,7 @@
+adtr 2
+adta -r 10000
+adtp
+adtp -r
+adtr 4
+adta -r 50000
+q -f

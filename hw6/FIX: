@@ -1,0 +1,3 @@
+FIX:
+	If m is larger than i + o + aig, some space may be unused.
+	Either set those unused back to null, or read two times and connect it after-wards.

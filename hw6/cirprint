@@ -1,0 +1,310 @@
+
+cirread tests.fraig/test2.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+
+cirwrite -o test2.aag
+
+
+
+cirread tests.fraig/test1.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/test2.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+
+
+cirread tests.fraig/strash09.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/strash08.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/strash07.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/strash06.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/strash05.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/strash04.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim15.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+cirread tests.fraig/sim15.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim14.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim13.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+cirg 87000 -fanin 27
+cirg 87000 -fanin 26
+cirg 87000 -fanin 25
+cirg 87000 -fanin 24
+cirg 87000 -fanin 23
+cirg 87000 -fanin 22
+cirg 87000 -fanin 21
+cirg 87000 -fanin 20
+cirg 87000 -fanin 19
+cirg 87000 -fanin 18
+cirg 87000 -fanin 17
+cirg 87000 -fanin 16
+cirg 87000 -fanin 15
+cirg 87000 -fanin 14
+cirg 87000 -fanin 13
+cirg 87000 -fanin 12
+cirg 87000 -fanin 11
+cirg 87000 -fanin 10
+cirg 87000 -fanin 9
+cirg 87000 -fanin 8
+cirg 87000 -fanin 7
+cirg 87000 -fanin 6
+cirg 87000 -fanin 5
+cirg 87000 -fanin 4
+cirg 87000 -fanin 3
+usage
+cirg 6000 -fanin 28
+cirg 6000 -fanin 27
+cirg 6000 -fanin 26
+cirg 6000 -fanin 25
+cirg 6000 -fanin 24
+cirg 6000 -fanin 23
+cirg 6000 -fanin 22
+cirg 6000 -fanin 21
+cirg 6000 -fanin 20
+cirg 6000 -fanin 19
+cirg 6000 -fanin 18
+cirg 6000 -fanin 17
+cirg 6000 -fanin 16
+cirg 6000 -fanin 15
+cirg 6000 -fanin 14
+cirg 6000 -fanin 13
+cirg 6000 -fanin 12
+cirg 6000 -fanin 11
+cirg 6000 -fanin 10
+cirg 6000 -fanin 9
+cirg 6000 -fanin 8
+cirg 6000 -fanin 7
+cirg 6000 -fanin 6
+cirg 6000 -fanin 5
+cirg 6000 -fanin 4
+cirg 6000 -fanin 3
+usage
+cirread tests.fraig/sim12.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+cirg 1354 -fanout 27
+cirg 1354 -fanout 26
+cirg 1354 -fanout 25
+cirg 1354 -fanout 24
+cirg 1354 -fanout 23
+cirg 1354 -fanout 22
+cirg 1354 -fanout 21
+cirg 1354 -fanout 20
+cirg 1354 -fanout 19
+cirg 1354 -fanout 18
+cirg 1354 -fanout 17
+cirg 1354 -fanout 16
+cirg 1354 -fanout 15
+cirg 1354 -fanout 14
+cirg 1354 -fanout 13
+cirg 1354 -fanout 12
+cirg 1354 -fanout 11
+cirg 1354 -fanout 10
+cirg 1354 -fanout 9
+cirg 1354 -fanout 8
+cirg 1354 -fanout 7
+cirg 1354 -fanout 6
+cirg 1354 -fanout 5
+cirg 1354 -fanout 4
+cirg 1354 -fanout 3
+usage
+
+cirread tests.fraig/sim11.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim10.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim09.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirread tests.fraig/sim08.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim07.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim06.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim05.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim04.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim03.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim02.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/sim01.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/ISCAS85/C7552.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/ISCAS85/C6288.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/ISCAS85/C5315.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/ISCAS85/C3540.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/ISCAS85/C1908.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/ISCAS85/C1355.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+cirread tests.fraig/ISCAS85/C880.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirp -net
+usage
+usage
+q -f
+
+

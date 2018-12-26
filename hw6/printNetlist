@@ -1,0 +1,9 @@
+
+cirread tests.fraig/sim13.aag -r 
+cirp -net
+
+usage
+q -f
+
+
+dofile readfileonly

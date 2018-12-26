@@ -110,7 +110,9 @@ public:
    void deleteRandom(size_t repeat = 1) {
       size_t s = _container.size();
       for (size_t i = 0; i < repeat; ++i) {
+           // cout << s << endl;
          size_t pos = rnGen(s);
+         //cout << pos << endl;
          if (_container.erase(getPos(pos))) --s;
       }
    }

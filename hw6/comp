@@ -1,0 +1,86 @@
+20,22c20,22
+< Period time used : 0.01 seconds
+< Total time used  : 0.01 seconds
+< Total memory used: 0.9883 M Bytes
+---
+> Period time used : 0.02 seconds
+> Total time used  : 0.02 seconds
+> Total memory used: 1.445 M Bytes
+45,46c45,46
+< Total time used  : 0.01 seconds
+< Total memory used: 1.418 M Bytes
+---
+> Total time used  : 0.02 seconds
+> Total memory used: 1.445 M Bytes
+68,69c68,69
+< Total time used  : 0.01 seconds
+< Total memory used: 1.418 M Bytes
+---
+> Total time used  : 0.02 seconds
+> Total memory used: 1.445 M Bytes
+92,93c92,93
+< Total time used  : 0.01 seconds
+< Total memory used: 1.418 M Bytes
+---
+> Total time used  : 0.02 seconds
+> Total memory used: 1.445 M Bytes
+114,115c114,115
+< Total time used  : 0.01 seconds
+< Total memory used: 1.418 M Bytes
+---
+> Total time used  : 0.02 seconds
+> Total memory used: 1.445 M Bytes
+136,137c136,137
+< Total time used  : 0.01 seconds
+< Total memory used: 1.418 M Bytes
+---
+> Total time used  : 0.02 seconds
+> Total memory used: 1.445 M Bytes
+160,161c160,161
+< Total time used  : 0.01 seconds
+< Total memory used: 1.418 M Bytes
+---
+> Total time used  : 0.02 seconds
+> Total memory used: 1.445 M Bytes
+184,185c184,185
+< Total time used  : 0.01 seconds
+< Total memory used: 1.418 M Bytes
+---
+> Total time used  : 0.02 seconds
+> Total memory used: 1.445 M Bytes
+205c205
+< Period time used : 0.01 seconds
+---
+> Period time used : 0 seconds
+207c207
+< Total memory used: 1.418 M Bytes
+---
+> Total memory used: 1.445 M Bytes
+246c246
+< Total memory used: 1.418 M Bytes
+---
+> Total memory used: 1.445 M Bytes
+266,268c266,268
+< Period time used : 0 seconds
+< Total time used  : 0.02 seconds
+< Total memory used: 1.676 M Bytes
+---
+> Period time used : 0.01 seconds
+> Total time used  : 0.03 seconds
+> Total memory used: 1.445 M Bytes
+288,290c288,290
+< Period time used : 0.09 seconds
+< Total time used  : 0.11 seconds
+< Total memory used: 11.47 M Bytes
+---
+> Period time used : 0.03 seconds
+> Total time used  : 0.06 seconds
+> Total memory used: 12.65 M Bytes
+311,313c311,313
+< Period time used : 0.01 seconds
+< Total time used  : 0.12 seconds
+< Total memory used: 11.47 M Bytes
+---
+> Period time used : 0 seconds
+> Total time used  : 0.06 seconds
+> Total memory used: 12.65 M Bytes

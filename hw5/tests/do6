@@ -1,5 +1,35 @@
-adta -r 100
-adtp
-adtd -r 20
-adtp
+adta -r 3000
+adtd -r 2900
+adta -r 10000
+adtd -r 9000
+adta -r 10000
+adtd -r 6000
+adta -r 10000
+adtd -r 6000
+adtp 
+usage
+
+
+adta -r 10000
+adtd -r 6000
+adtp 
+adtp -r
+usage
+
+
+adtp 
+adtp -r
+adta -r 10000
+adtd -r 5000
+adtp 
+adtp -r
+adta -r 10000
+adtd -r 5000
+adtp 
+adtp -r
+adtd -r 5000
+adtd -r 5000
+adtd -r 5000
+adtp 
+adtp -r
 q -f
