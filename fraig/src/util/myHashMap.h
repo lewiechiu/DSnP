@@ -21,18 +21,40 @@ using namespace std;
 // To use HashMap ADT, you should define your own HashKey class.
 // It should at least overload the "()" and "==" operators.
 //
-// class HashKey
-// {
-// public:
-//    HashKey() {}
-// 
-//    size_t operator() () const { return 0; }
-// 
-//    bool operator == (const HashKey& k) const { return true; }
-// 
-// private:
-// };
-//
+class HashKey
+{
+public:
+   HashKey() :a(0),b(0) {}
+   HashKey(int x,int y) : a(x),b(y){}
+
+   bool operator == (const HashKey& k) const 
+   {
+      if(k.a==a && k.b == b)
+         return true;
+      return false;
+   }
+
+   int a;
+   int b;
+};
+
+
+namespace std
+{
+   template<>
+   struct hash<HashKey>
+   {
+      string operator()(const HashKey& yolo) const
+      {
+         string a = to_string(yolo.a) + '|' + to_string(yolo.b);
+         return a;
+      }
+   };
+} // std
+
+
+
+
 template <class HashKey, class HashData>
 class HashMap
 {
@@ -42,23 +64,7 @@ public:
    HashMap(size_t b=0) : _numBuckets(0), _buckets(0) { if (b != 0) init(b); }
    ~HashMap() { reset(); }
 
-   // [Optional] TODO: implement the HashMap<HashKey, HashData>::iterator
-   // o An iterator should be able to go through all the valid HashNodes
-   //   in the HashMap
-   // o Functions to be implemented:
-   //   - constructor(s), destructor
-   //   - operator '*': return the HashNode
-   //   - ++/--iterator, iterator++/--
-   //   - operators '=', '==', !="
-   //
-   class iterator
-   {
-      friend class HashMap<HashKey, HashData>;
 
-   public:
-
-   private:
-   };
 
    void init(size_t b) {
       reset(); _numBuckets = b; _buckets = new vector<HashNode>[b]; }
@@ -77,9 +83,9 @@ public:
    // TODO: implement these functions
    //
    // Point to the first valid data
-   iterator begin() const { return iterator(); }
+   // iterator begin() const { return iterator(); }
    // Pass the end
-   iterator end() const { return iterator(); }
+   // iterator end() const { return iterator(); }
    // return true if no valid data
    bool empty() const { return true; }
    // number of valid data

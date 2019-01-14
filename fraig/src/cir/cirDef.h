@@ -10,7 +10,8 @@
 #define CIR_DEF_H
 
 #include <vector>
-#include "myHashMap.h"
+#include "../util/myHashMap.h"
+
 #include <algorithm>
 using namespace std;
 
@@ -22,8 +23,8 @@ class SatSolver;
 #define zero INT_MAX-3;
 #define zeroi (INT_MAX*-1)+3
 #define mynull 1000000000
-#include <list>
-#include <set>
+
+
 
 
 

@@ -5,6 +5,25 @@ cirprin -po
 cirprint -fl
 cirprint -net
 cirsweep
+cirread tests.fraig/tre3.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirstrash
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+do checkFanOutL
+q -f
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -float
+cirp -net
 cirrea tests.fraig/sim12.aag -r
 cirsweep
 cirprin
@@ -33,25 +52,7 @@ cirprin -po
 cirprint -float
 cirp -net
 do checkFanOutML
-cirread tests.fraig/tre3.aag -r
-cirprint -PI
-cirprint -PO
-cirprint
-cirprint -fl
-cirprint -net
-cirsweep
-cirprin
-cirprin -pi
-cirprin -po
-cirprint -fl
-cirprint -net
-ciroptimize
-cirprin
-cirprin -pi
-cirprin -po
-cirprint -float
-cirp -net
-do checkFanOutL
+
 cirread tests.fraig/tre3.aag -r
 cirprint -PI
 cirprint -PO

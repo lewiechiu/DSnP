@@ -534,7 +534,7 @@ CirWriteCmd::exec(const string& option)
             cerr << "Error: Gate(" << gateId << ") not found!!" << endl;
             return CmdExec::errorOption(CMD_OPT_ILLEGAL, options[i]);
          }
-         if (!thisGate->isAig()) {
+         if (thisGate->getTypeStr()!='a') {
              cerr << "Error: Gate(" << gateId << ") is NOT an AIG!!" << endl;
             return CmdExec::errorOption(CMD_OPT_ILLEGAL, options[i]);
          }

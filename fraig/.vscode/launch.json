@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "/home/louiechiu/Desktop/school/DSnP/fraig/fraig",
-            "args": ["-f","test optimize"],
+            "args": ["-f","read"],
             "stopAtEntry": false,
             "cwd": "/home/louiechiu/Desktop/school/DSnP/fraig",
             "environment": [],

@@ -14,6 +14,8 @@
 #include <fstream>
 #include <iostream>
 
+#include "../util/myHashSet.h"
+
 using namespace std;
 
 // TODO: Feel free to define your own classes, variables, or functions.
@@ -69,6 +71,7 @@ public:
    void markSweep(int a);
    void opt(int a);
    double inverse(double a)const;
+   void trashDFS(int pt);
 
    //non related helper function
 protected:
@@ -82,9 +85,7 @@ private:
    int POs;
    int PIs;
    int m;
-   
-   CirGate* CONSTANT0;
-   list<const CirGate* > _dfs;
+   HashSet<myKey> hs;
 };
 
 #endif // CIR_MGR_H

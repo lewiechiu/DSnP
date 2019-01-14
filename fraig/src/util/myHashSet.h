@@ -27,6 +27,30 @@ using namespace std;
 // an equivalent "Data" object in the HashSet.
 // Note that HashSet does not allow equivalent nodes to be inserted
 //
+
+class myKey
+{
+   int in1,in2;
+   int location;
+public:
+
+   friend class CirMgr;
+   myKey():in1(0),in2(0), location(0){} 
+   myKey(int a,int b,int loc):in1(a),in2(b),location(loc){}
+   size_t operator()()const
+   {
+      return (in1 * in2 + in1+ in2 );
+   }
+   bool operator==(const myKey& k)const
+   {
+      return (k.in1 == in1 && k.in2 == in2) || (k.in2 == in1 && k.in1 == in2);
+   }
+   int getID()const{return location;}
+   int geti1()const{return in1;}
+   int geti2()const{return in2;}
+};
+
+
 template <class Data>
 class HashSet
 {

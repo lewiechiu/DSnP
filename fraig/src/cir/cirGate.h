@@ -40,7 +40,6 @@ public:
     
     unsigned getLineNo() const { return line; }
     virtual const char getTypeStr() const {};
-    virtual bool isAig() const {};
     virtual string getSymbolicName() const{};
     virtual void setSymbolicName(string s) {};
     virtual float getInputNum() const{};
@@ -77,7 +76,6 @@ class CirAIGGate : public  CirGate
     
 protected:
     void printGate() const;
-    bool isAig()const{return true;};
 
     
 };
@@ -112,7 +110,6 @@ class CirPOGate : public CirGate
     const char getTypeStr() const{ return 'o';};
     string getSymbolicName() const{return SymbolicName;};
     void setSymbolicName(string s) {SymbolicName = s; return ;};
-    bool isAig()const{return false;};
     float getInputNum()const {return in1;};
 protected:
     
