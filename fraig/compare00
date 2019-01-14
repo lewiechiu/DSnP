@@ -1,0 +1,44 @@
+cirread tests.fraig/sim13.aag
+cirgate 20 -fanout 100
+cirgate 40 -fanout 100
+cirgate 30 -fanout 100
+cirgate 74 -fanout 100
+cirgate 81 -fanout 100
+cirgate 260 -fanout 100
+cirgate 730 -fanout 100
+cirgate 129 -fanout 100
+cirgate 831 -fanout 100
+cirgate 947 -fanout 100
+cirgate 972 -fanout 100
+cirgate 20 -fanout 47
+cirgate 9487 -fanout 50
+cirread tests.fraig/tre1.aag -r
+cirgate 20 -fanout 100
+cirgate 40 -fanout 100
+cirgate 30 -fanout 100
+cirgate 74 -fanout 100
+cirgate 81 -fanout 100
+cirgate 260 -fanout 100
+cirgate 730 -fanout 100
+cirgate 129 -fanout 100
+cirgate 831 -fanout 100
+cirgate 947 -fanout 100
+cirgate 972 -fanout 100
+cirgate 20 -fanout 47
+cirgate 9487 -fanout 50
+q -f
+cirread tests.fraig/tre3.aag -r
+cirgate 20 -fanout 100
+cirgate 40 -fanout 100
+cirgate 30 -fanout 100
+cirgate 74 -fanout 100
+cirgate 81 -fanout 100
+cirgate 260 -fanout 100
+cirgate 730 -fanout 100
+cirgate 129 -fanout 100
+cirgate 831 -fanout 100
+cirgate 947 -fanout 100
+cirgate 972 -fanout 100
+cirgate 20 -fanout 47
+cirgate 9487 -fanout 50
+q -f

@@ -13,8 +13,8 @@ int min(int a,int b)
 int main()
 {
     RandomNumGen rn;
-    ofstream out("tre.aag");
-    size_t PI = 300, l = 0, o = 30000, a = 100000;
+    ofstream out("../fraig/tests.fraig/tre3.aag");
+    size_t PI = 3000, l = 0, o = 4000, a = 200000;
     size_t undef = 0;
     size_t m = PI + a + undef;
     int *isUsed = new int[m+1];

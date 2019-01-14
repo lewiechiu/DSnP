@@ -1,0 +1,9 @@
+cirread tests.fraig/sim05.aag
+cirprint
+cirp -net
+ciroptimize
+cirprint
+cirp -net
+q -f
+
+

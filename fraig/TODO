@@ -1,0 +1,7 @@
+make a test case to test cirgate
+that is to test also 1. fanin 2. fanout 3. gate
+
+Check Constant 0 fanout -> COmpare with ref
+
+Check if i perform a gate on a previously deleted gate
+after the sweep process.

@@ -1,0 +1,377 @@
+cirrea tests.fraig/float.aag
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirsweep
+cirrea tests.fraig/sim12.aag -r
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -float
+cirp -net
+ciroptimize
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -float
+cirp -net
+do checkFanOutS
+cirrea tests.fraig/sim13.aag -r
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -float
+cirp -net
+ciroptimize
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -float
+cirp -net
+do checkFanOutML
+cirread tests.fraig/tre3.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+ciroptimize
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -float
+cirp -net
+do checkFanOutL
+cirread tests.fraig/tre3.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+ciroptimize
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -float
+cirp -net
+do checkFanOutL
+cirread tests.fraig/tre.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+ciroptimize
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -float
+cirp -net
+do checkFanOutL
+
+cirrea tests.fraig/sim01.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirrea tests.fraig/sim02.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+
+cirrea tests.fraig/sim03.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirrea tests.fraig/sim09.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirrea tests.fraig/sim10.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirrea tests.fraig/sim11.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirrea tests.fraig/sim13.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+ciroptimize
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -float
+cirp -net
+do fan
+cirrea tests.fraig/sim14.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirrea tests.fraig/sim15.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirrea tests.fraig/test1.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirrea tests.fraig/const0.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+
+
+usage
+cirrea tests.fraig/opt07.aag -r
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirread tests.fraig/ISCAS85/C7552.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirread tests.fraig/ISCAS85/C6288.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirread tests.fraig/ISCAS85/C5315.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirread tests.fraig/ISCAS85/C3540.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirread tests.fraig/ISCAS85/C1908.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirread tests.fraig/ISCAS85/C1355.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirread tests.fraig/ISCAS85/C880.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+
+cirread tests.fraig/my2.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+usage
+cirread tests.fraig/my1.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+cirread tests.fraig/const0.aag -r
+cirprint -PI
+cirprint -PO
+cirprint
+cirprint -fl
+cirprint -net
+cirsweep
+cirprin
+cirprin -pi
+cirprin -po
+cirprint -fl
+cirprint -net
+q -f

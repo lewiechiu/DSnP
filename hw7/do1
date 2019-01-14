@@ -25,7 +25,7 @@ usage
 taskquery -heap
 
 usage
-q -f
+
 tasknew -r 500
 do dofiles/do1
 !-do1 done

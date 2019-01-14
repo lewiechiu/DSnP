@@ -1,0 +1,3 @@
+cirread tests.fraig/const0.aag
+cirgate 0 -fanout 3
+q -f

@@ -1,0 +1,12 @@
+g++ cirgate.cpp -o fanoutGen
+./fanoutGen
+
+./ref/fraig-linux18 -f read > a
+echo ======
+./fraig -f read > m
+
+
+colordiff m a > d
+
+vim d
+

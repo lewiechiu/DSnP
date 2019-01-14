@@ -31,17 +31,19 @@ public:
     ~CirGate() {}
 
     // Basic access methods
-    string getTypeStr() const { return ""; }
-    unsigned getLineNo() const { return 0; }
+    virtual string getTypeStr() const {};
+    unsigned getLineNo() const { return line; }
 
     // Printing functions
     virtual void printGate() const{};
     void reportGate() const;
     void reportFanin(int level) const;
     void reportFanout(int level) const;
+    virtual string getSymbolicName() const{};
+    virtual vector<CirGate* >& getOutput() const;
 protected:
     size_t ID = 0;
-    vector<CirGate* > output;
+    
     int in1 = -1;
     int in2 = -1;
     int line = 0;
@@ -62,6 +64,7 @@ class CirAIGGate : public  CirGate
     friend class CirMgr;
     friend class CirGate;
     public:
+    
     CirAIGGate() :CirGate(){}
     ~CirAIGGate() 
     {
@@ -69,12 +72,15 @@ class CirAIGGate : public  CirGate
         in2 = 0;
         output.clear();
     }
+    string getTypeStr() const{ return "CirAIGGate";}
+    
 protected:
     void printGate() const{};
     void setInGate(CirGate* i1, CirGate* i2);
     void setInInvGate(bool i1, bool i2);
     void setOutput(const vector<CirGate* > & out);
-
+    vector<CirGate* >& getOutput() const{return &output};
+    vector<CirGate* > output;
 
     
 };
@@ -89,7 +95,10 @@ class CirPIGate : public CirGate
         output.clear();
     }
     void printGate() const{};
+    string getTypeStr() const{ return "CirPIGate";};
+    string getSymbolicName() const{return SymbolicName;}
 protected:
+    vector<CirGate* > output;
 };
 
 class CirPOGate : public CirGate
@@ -103,6 +112,8 @@ class CirPOGate : public CirGate
     {
         input = nullptr;
     }
+    string getTypeStr() const{ return "CirPOGate";}
+    string getSymbolicName() const{return SymbolicName;}
 protected:
     
     void printGate() const{};
