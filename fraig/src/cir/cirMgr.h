@@ -72,6 +72,7 @@ public:
    void opt(int a);
    double inverse(double a)const;
    void trashDFS(int pt);
+   void simpleDFS(int pt);
 
    //non related helper function
 protected:

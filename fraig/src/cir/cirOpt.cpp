@@ -68,6 +68,7 @@ CirMgr::sweep()
     int a = abs(PO[i]->getInputNum());
     markSweep(a);
   }
+
   for(int i=1;i<gate.size();i++)
   {
     if(gate[i]==NULL)
@@ -91,15 +92,7 @@ CirMgr::sweep()
       
       
       //remove output
-      int me = gate[i]->ID;
-      for(auto j = gate[i]->output.begin() ; j != gate[i]->output.end();j++)
-      {
-        
-        if(abs(j->second->in1)==me)
-          j->second->in1 = mynull;
-        else
-          j->second->in2 = mynull;
-      }
+
       cout << "Sweeping: ";
       if(gate[i]->getTypeStr()=='u')
         cout << "UNDEF(" << i ;
@@ -136,6 +129,10 @@ CirMgr::opt(int pt)
   // 2 same
   if(gate[pt]->in1 == gate[pt]->in2)
   {
+    cout << "Simplifying: " << abs(gate[pt]->in1) << " merging " ;
+    if(isInverse(gate[pt]->in1))
+      cout << "!";
+    cout << pt << "..." << endl;
     opted = true;
     for(auto i = gate[pt]->output.begin(); i != gate[pt]->output.end(); i++)
     {
@@ -167,15 +164,23 @@ CirMgr::opt(int pt)
     opted = true;
     //removing pt from 0's output
     gate[0]->output.erase(pt);
-
+    
     // add pt's output into non 0 input's output
     if(gate[pt]->in1 != -0.1)
     {
+      cout << "Simplifying: " << abs(gate[pt]->in1) << " merging " ;
+      if(isInverse(gate[pt]->in1))
+        cout << "!";
+      cout << pt << "..." << endl;
       getGate(abs(gate[pt]->in1))->output.insert(gate[pt]->output.begin(),gate[pt]->output.end());
       getGate(abs(gate[pt]->in1))->output.erase(pt);
     }
     else
     {
+      cout << "Simplifying: " << abs(gate[pt]->in2) << " merging " ;
+      if(isInverse(gate[pt]->in2))
+        cout << "!";
+      cout << pt << "..."<< endl;
       getGate(abs(gate[pt]->in2))->output.insert(gate[pt]->output.begin(),gate[pt]->output.end());
       getGate(abs(gate[pt]->in2))->output.erase(pt);
     }
@@ -223,23 +228,32 @@ CirMgr::opt(int pt)
   else if(abs(gate[pt]->in1 + gate[pt]->in2) < 0.3)
   {
     opted = true;
+    
     gate[0]->output.insert(gate[pt]->output.begin(),gate[pt]->output.end());
+    cout << "Simplifying: 0 merging " << pt << "..." << endl;
     for(auto i = gate[pt]->output.begin(); i != gate[pt]->output.end(); i++)
     {
+      
       if(abs(i->second->in1)==pt)
       {
         if(isInverse(i->second->in1))
+        {
           i->second->in1 = -0.1;
+        }
         else
           i->second->in1 = 0;  
       }
       else
       {
         if(isInverse(i->second->in2))
+        {
           i->second->in2 = -0.1;
+
+        }
         else
           i->second->in2 = 0;  
       }
+
     }
     getGate(abs(gate[pt]->in1))->output.erase(pt);
   }
@@ -249,7 +263,7 @@ CirMgr::opt(int pt)
     opted = true;
     gate[0]->output.erase(pt);
     gate[0]->output.insert(gate[pt]->output.begin(),gate[pt]->output.end());
-
+    cout << "Simplifying: 0 merging " << pt << "..." << endl;
 
     if(gate[pt]->in1!=0)
       getGate(abs(gate[pt]->in1))->output.erase(pt);

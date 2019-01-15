@@ -30,7 +30,7 @@ using namespace std;
 
 class myKey
 {
-   int in1,in2;
+   double in1,in2;
    int location;
 public:
 
@@ -43,7 +43,11 @@ public:
    }
    bool operator==(const myKey& k)const
    {
-      return (k.in1 == in1 && k.in2 == in2) || (k.in2 == in1 && k.in1 == in2);
+      if(in1 == k.in1 && in2 == k.in2)
+         return true;
+      if(in2 == k.in1 && in1 == k.in2)
+         return true;
+      return false;
    }
    int getID()const{return location;}
    int geti1()const{return in1;}

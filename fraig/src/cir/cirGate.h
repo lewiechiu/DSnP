@@ -34,6 +34,8 @@ public:
     ~CirGate() 
     {
         output.clear();
+        in1 = in2 = INT_MIN;
+        line = 0;
     }
 
     // Basic access methods
@@ -64,11 +66,14 @@ class CirAIGGate : public  CirGate
 {
     friend class CirMgr;
     friend class CirGate;
-    public:
+    size_t sig1;
+    size_t sig2;
+public:
     
     CirAIGGate() :CirGate(){}
     ~CirAIGGate() 
     {
+        output.clear();
         in1 = 0;
         in2 = 0;
     }
@@ -76,8 +81,8 @@ class CirAIGGate : public  CirGate
     
 protected:
     void printGate() const;
-
-    
+    void setOutput(const size_t a, const size_t b);
+    size_t result()const;
 };
 class CirPIGate : public CirGate
 {
@@ -102,6 +107,7 @@ class CirPOGate : public CirGate
 {
     friend class CirMgr;
     friend class CirGate;
+    size_t result;
     public:
     CirPOGate(): input(INT_MIN) , CirGate(){}
     CirPOGate(float in): CirGate(in){}
@@ -115,7 +121,7 @@ protected:
     
     void printGate() const{};
     float input;
-    
+    void setresult(size_t a);
     string SymbolicName;
 };
 

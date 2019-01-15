@@ -40,22 +40,16 @@ CirMgr::trashDFS(int pt)
     return;
   if(abs(gate[pt]->printIDX) == printidxs)
     return;
-  int lef = abs(this->gate[pt]->in1);
-  int rig = abs(this->gate[pt]->in2);
-  trashDFS(lef);
-  trashDFS(rig);
-  if(abs(gate[pt]->printIDX) == printidxs)
-    return;
-
-  gate[pt]->printIDX = printidxs;
-  if(gate[pt]->getTypeStr()!='a')
-    return;
   int l = abs(gate[pt]->in1);
   int r = abs(gate[pt]->in2);
-  myKey a(l,r,pt);
+  if(gate[pt]->getTypeStr()!='a')
+    return;
+  myKey a(gate[pt]->in1,gate[pt]->in2,pt);
   if(hs.check(a))
   {
     //remove pt
+
+    hs.query(a);
     cout << "Strashing: " << a.getID() << " merging " << pt << "..." << endl;
     getGate(a.getID())->output.insert(gate[pt]->output.begin(),gate[pt]->output.end());
     getGate(l)->output.erase(pt);
@@ -79,18 +73,26 @@ CirMgr::trashDFS(int pt)
     }
     delete gate[pt];
     gate[pt] = nullptr;
+    return ;
   }
   else
+  {
     hs.insert(a);
+    trashDFS(l);
+    trashDFS(r);
+    if(abs(gate[pt]->printIDX) == printidxs)
+      return;
 
+    gate[pt]->printIDX = printidxs;
+  }
 
-  
 }
 
 
 void
 CirMgr::strash()
 {
+  printidxs++;
   hs.init(m);
   for(int i=0;i<POs;i++)
   {

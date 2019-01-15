@@ -443,7 +443,11 @@ CirMgr::readCircuit(const string& fileName)
    {
       int ap = abs(PO[cnt]->getInputNum());
       if(gate[ap]==nullptr)
+      {
          gate[ap] = new CirUNDEFGate();
+         gate[ap]->ID = ap;
+      }
+         
       this->gate[ap]->output.insert( make_pair(cnt+m+1,this->PO[cnt]) );
    }
 
@@ -757,7 +761,7 @@ CirMgr::printFanOut(int pt,int &depth,int lim,int &tab,int prev)const
       if(printFanOut(ou,depth,lim,tab, gate[posPT]->ID))
          pass++;
    }
-   if(pass == gate[posPT]->output.size())
+   if(pass == gate[posPT]->output.size() && pass!=0)
       gate[posPT]->printIDX = printidxs;
 
    depth--;
