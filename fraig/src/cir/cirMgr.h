@@ -13,6 +13,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <set>
 
 #include "../util/myHashSet.h"
 
@@ -46,6 +47,10 @@ public:
    void randomSim();
    void fileSim(ifstream&);
    void setSimLog(ofstream *logFile) { _simLog = logFile; }
+   void runSim();
+   void putInputSig(size_t *);
+   void writeSimResult(size_t *,int );
+   void fecGrouping();
 
    // Member functions about fraig
    void strash();
@@ -73,6 +78,7 @@ public:
    double inverse(double a)const;
    void trashDFS(int pt);
    void simpleDFS(int pt);
+   void writeDFS(int pt,ostream&)const;
 
    //non related helper function
 protected:
@@ -87,6 +93,7 @@ private:
    int PIs;
    int m;
    HashSet<myKey> hs;
+   set<myFECgrps> fecgrps;
 };
 
 #endif // CIR_MGR_H

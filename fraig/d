@@ -1,41 +1,8 @@
-399a400
->             !AIG 5139 (*)
-2393c2394,2395
-<                 !AIG 5220
+122028,122030c122028,122030
+< Period time used : 0.5 seconds
+< Total time used  : 0.5 seconds
+< Total memory used: 35.24 M Bytes
 ---
->                 AIG 5220
->                 AIG 5220
-24908a24911
->             !AIG 5139 (*)
-26902c26905,26906
-<                 !AIG 5220
----
->                 AIG 5220
->                 AIG 5220
-49389a49394
->             !AIG 5139 (*)
-51383c51388,51389
-<                 !AIG 5220
----
->                 AIG 5220
->                 AIG 5220
-332519,332521c332525,332527
-< Period time used : 1.08 seconds
-< Total time used  : 1.08 seconds
-< Total memory used: 54.14 M Bytes
----
-> Period time used : 0.52 seconds
-> Total time used  : 0.52 seconds
-> Total memory used: 15.28 M Bytes
-332544c332550
-< Gates with floating fanin(s): 6
----
-> Gates with floating fanin(s): 7
-334390,334392c334396,334398
-< Period time used : 0.02 seconds
-< Total time used  : 1.1 seconds
-< Total memory used: 57.75 M Bytes
----
-> Period time used : 0.01 seconds
-> Total time used  : 0.53 seconds
-> Total memory used: 15.28 M Bytes
+> Period time used : 0.25 seconds
+> Total time used  : 0.25 seconds
+> Total memory used: 19.46 M Bytes

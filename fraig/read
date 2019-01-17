@@ -1,10 +1,60 @@
 
-cirread mytest.aag -r
+cirrea tests.fraig/opt01.aag
 do basicCheck
-do checkFanOutS
-
+ciropt
+do basicCheck
+do checkFanOutSS
+cirrea tests.fraig/opt02.aag
+do basicCheck
+ciropt
+do basicCheck
+do checkFanOutSS
+cirrea tests.fraig/opt03.aag
+do basicCheck
+ciropt
+do basicCheck
+do checkFanOutSS
+cirrea tests.fraig/opt04.aag
+do basicCheck
+ciropt
+do basicCheck
+do checkFanOutSS
+cirrea tests.fraig/opt05.aag
+do basicCheck
+ciropt
+do basicCheck
+do checkFanOutSS
+cirrea tests.fraig/opt06.aag
+do basicCheck
+ciropt
+do basicCheck
+do checkFanOutSS
+cirrea tests.fraig/opt07.aag
+do basicCheck
+cirstrash
+ciropt
+do basicCheck
+do checkFanOutSS
+cirrea tests.fraig/strash08.aag
+do basicCheck
+ciropt
+do basicCheck
+do checkFanOutSS
+cirrea tests.fraig/strash09.aag
+do basicCheck
+cirstrash
+do basicCheck
+do checkFanOutSS
+cirrea tests.fraig/strash10.aag
+do basicCheck
+cirstrash
+do basicCheck
+do checkFanOutSS
 cirrea tests.fraig/float.aag
 do basicCheck
+do checkFanOutSS
+
+q -f
 
 cirread mytest.aag -r
 cirsweep

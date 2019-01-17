@@ -42,6 +42,10 @@ CirMgr::trashDFS(int pt)
     return;
   int l = abs(gate[pt]->in1);
   int r = abs(gate[pt]->in2);
+
+
+  trashDFS(l);
+  trashDFS(r);
   if(gate[pt]->getTypeStr()!='a')
     return;
   myKey a(gate[pt]->in1,gate[pt]->in2,pt);
@@ -51,9 +55,10 @@ CirMgr::trashDFS(int pt)
 
     hs.query(a);
     cout << "Strashing: " << a.getID() << " merging " << pt << "..." << endl;
+
     getGate(a.getID())->output.insert(gate[pt]->output.begin(),gate[pt]->output.end());
-    getGate(l)->output.erase(pt);
-    getGate(r)->output.erase(pt);
+    getGate(abs(gate[pt]->in1))->output.erase(pt);
+    getGate(abs(gate[pt]->in2))->output.erase(pt);
     for(auto i = gate[pt]->output.begin(); i != gate[pt]->output.end() ; i++)
     {
       if(abs(i->second->in1)== pt)
@@ -68,7 +73,7 @@ CirMgr::trashDFS(int pt)
         if(isInverse(i->second->in2))
           i->second->in2 = inverse(a.getID());
         else
-          i->second->in2 = gate[pt]->in1;
+          i->second->in2 = a.getID();
       }
     }
     delete gate[pt];
@@ -78,12 +83,11 @@ CirMgr::trashDFS(int pt)
   else
   {
     hs.insert(a);
-    trashDFS(l);
-    trashDFS(r);
     if(abs(gate[pt]->printIDX) == printidxs)
       return;
 
     gate[pt]->printIDX = printidxs;
+    return ;
   }
 
 }
@@ -94,7 +98,7 @@ CirMgr::strash()
 {
   printidxs++;
   hs.init(m);
-  for(int i=0;i<POs;i++)
+   for(int i=0;i<POs;i++)
   {
     trashDFS(abs(PO[i]->in1));
   }

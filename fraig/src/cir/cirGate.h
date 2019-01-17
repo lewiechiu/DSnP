@@ -45,10 +45,12 @@ public:
     virtual string getSymbolicName() const{};
     virtual void setSymbolicName(string s) {};
     virtual float getInputNum() const{};
+    virtual size_t genResult() const{};
 
     // Printing functions
     virtual void printGate() const{};
     void reportGate() const;
+    void myreportGate() const;
     void reportFanin(int level) const;
     void reportFanout(int level) const;
     
@@ -78,7 +80,7 @@ public:
         in2 = 0;
     }
     const char getTypeStr() const{ return 'a';}
-    
+    size_t genResult() const;
 protected:
     void printGate() const;
     void setOutput(const size_t a, const size_t b);
@@ -88,6 +90,9 @@ class CirPIGate : public CirGate
 {
     friend class CirMgr;
     friend class CirGate;
+
+    size_t inSig = 0;
+
     public:
     CirPIGate() : CirGate() {}
     ~CirPIGate() 
@@ -99,6 +104,8 @@ class CirPIGate : public CirGate
     string getSymbolicName() const{return SymbolicName;}
     void setSymbolicName(string s) {SymbolicName = s; return ;};
     bool isAig()const{return false;}
+    size_t genResult() const;
+
 protected:
     string SymbolicName;
 };
@@ -109,7 +116,7 @@ class CirPOGate : public CirGate
     friend class CirGate;
     size_t result;
     public:
-    CirPOGate(): input(INT_MIN) , CirGate(){}
+    CirPOGate(): CirGate(){}
     CirPOGate(float in): CirGate(in){}
     ~CirPOGate() 
     {}
@@ -117,10 +124,12 @@ class CirPOGate : public CirGate
     string getSymbolicName() const{return SymbolicName;};
     void setSymbolicName(string s) {SymbolicName = s; return ;};
     float getInputNum()const {return in1;};
+    size_t genResult() const;
+
+
 protected:
     
     void printGate() const{};
-    float input;
     void setresult(size_t a);
     string SymbolicName;
 };
@@ -133,6 +142,7 @@ public:
     ~Cir0Gate(){}
     const char getTypeStr() const{ return '0';}
     void printGate() const;
+    size_t genResult() const;
 };
 
 class CirUNDEFGate : public CirGate
@@ -143,6 +153,7 @@ public:
     ~CirUNDEFGate() {}
     const char getTypeStr() const{return 'u';};
     void printGate() const{};
+    size_t genResult() const {return 0;};
 };
 
 #endif // CIR_GATE_H

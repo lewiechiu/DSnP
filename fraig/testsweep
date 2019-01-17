@@ -1,0 +1,7 @@
+cirread mysweep.aag
+do basicCheck
+cirsweep
+do basicCheck
+do checkFanOutL
+usage
+q -f

@@ -1,0 +1,5 @@
+cirread tests.fraig/sim13.aag
+cirwrite -o my13.aag
+cirread tests.fraig/tre3.aag -r
+cirwrite -o mytre3.aag
+q -f

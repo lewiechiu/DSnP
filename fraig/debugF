@@ -1,0 +1,11 @@
+g++ cirgate.cpp -o fanoutGen
+./fanoutGen
+
+./td mysweep.aag 20000 1 120000 800
+
+./fraig -f testsweep > m
+echo -====
+./ref/fraig-linux18 -f testsweep > a
+echo ----
+colordiff m a > d
+

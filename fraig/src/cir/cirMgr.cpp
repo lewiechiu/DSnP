@@ -160,6 +160,7 @@ CirMgr::readCircuit(const string& fileName)
    this->gate.clear();
    this->gate.resize(0);
    this->PO.resize(0);
+   this->hs.reset();
    string input;
    int m,i,o,a;
    fstream in(fileName);
@@ -190,7 +191,8 @@ CirMgr::readCircuit(const string& fileName)
       //cout << m << endl;
       this->m = m;
       this->gate.resize(m+1);  
-      
+      fecgrps.clear();
+      hs.init(m);
       //cout << "reserved" << this->gate.max_size() << endl;
    }
    if(myStr2Int(I,i))
@@ -442,6 +444,7 @@ CirMgr::readCircuit(const string& fileName)
    for(int cnt =0;cnt<this->POs;cnt++)
    {
       int ap = abs(PO[cnt]->getInputNum());
+      //FIX  may not be int
       if(gate[ap]==nullptr)
       {
          gate[ap] = new CirUNDEFGate();
@@ -668,7 +671,82 @@ CirMgr::printFECPairs() const
 void
 CirMgr::writeAag(ostream& outfile) const
 {
+   outfile << "aag " << m << " " << PIs << " 0 " << POs;
+   int as=0;
+   for(int i=0;i<gate.size();i++)
+      if(gate[i]!=nullptr && gate[i]->getTypeStr()=='a')
+         as++;
+   outfile << " " << as << endl;
+   for(int i=0;i<PIs;i++)
+      outfile << PInum[i] * 2 << endl;
+   printidxs++;
+   for(int i=0;i<POs;i++)
+   {
+      if(isInverse(PO[i]->getInputNum()))
+         outfile << POnum[i]*2 +1 << endl;
+      else
+         outfile << POnum[i]*2 << endl;
+   }
+   for(int i=0;i<POs;i++)
+   {
+      writeDFS(abs(PO[i]->getInputNum()),outfile);
+   }
+   for(int i=0;i<PIs;i++)
+   {
+      if(!gate[PInum[i]]->getSymbolicName().empty())
+         outfile << "i" << i << " "<< gate[PInum[i]]->getSymbolicName() << endl;
+   }
+   for(int i=0;i<POs;i++)
+   {
+      if(!PO[i]->getSymbolicName().empty())
+         outfile << "o" << i << " "<< PO[i]->getSymbolicName() << endl;
+   }
+   outfile << "c" <<endl;
+   outfile << "I really had enough of DSnP I really need a break" << endl;
+   //handle symbolic name
+
+
 }
+
+
+void
+CirMgr::writeDFS(int pt,ostream& out) const
+{
+   if(pt > gate.size() || pt<0 || this->gate[pt]==nullptr)
+      return;
+   if(abs(gate[pt]->printIDX) == printidxs)
+      return;
+   int lef = abs(this->gate[pt]->in1);
+   int rig = abs(this->gate[pt]->in2);
+   writeDFS(lef,out);
+   writeDFS(rig,out);
+   if(abs(gate[pt]->printIDX) == printidxs)
+      return;
+
+  gate[pt]->printIDX = printidxs;
+  
+  if(gate[pt]->getTypeStr()=='a')
+  {
+      int l = abs(gate[pt]->in1);
+      int r = abs(gate[pt]->in2);
+      out << gate[pt]->ID*2 << " ";
+      if(isInverse(gate[pt]->in1))
+         out << l*2 +1;
+      else
+         out << l*2;
+      out << " ";
+      if(isInverse(gate[pt]->in2))
+         out << r*2 +1;
+      else
+         out << r*2;
+      out << endl;
+  }
+
+
+
+}
+
+
 
 void
 CirMgr::writeGate(ostream& outfile, CirGate *g) const
@@ -691,7 +769,7 @@ CirMgr::printFanin(int pt,int &depth,int lim,int &tab)const
    if(isInverse(pt) )
       cout << "!";
    cout.flush();
-   gate[posPT]->reportGate();
+   gate[posPT]->myreportGate();
    if(gate[posPT]->printIDX == printidxs && gate[posPT]->getTypeStr()!= 'i'  && depth !=lim)
    {
       cout << " (*)" << endl;
@@ -729,7 +807,7 @@ CirMgr::printFanOut(int pt,int &depth,int lim,int &tab,int prev)const
             cout << "  ";
          if(PO[posPT]->getInputNum()<0)
             cout << "!";
-         PO[posPT]->reportGate();
+         PO[posPT]->myreportGate();
          cout << endl;
          return true;
       }
@@ -745,7 +823,7 @@ CirMgr::printFanOut(int pt,int &depth,int lim,int &tab,int prev)const
    else if(abs(gate[pt]->in2)==prev && gate[pt]->in2<0)
       cout << "!";
    cout.flush();
-   gate[posPT]->reportGate();
+   gate[posPT]->myreportGate();
    if(gate[posPT]->printIDX == printidxs && gate[posPT]->getTypeStr()!= 'o' && depth !=lim)
    {
       cout << " (*)" << endl;

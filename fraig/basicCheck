@@ -3,3 +3,4 @@ cirprin -pi
 cirprin -po
 cirprint -fl
 cirprint -net
+cirwrite -o my.aag

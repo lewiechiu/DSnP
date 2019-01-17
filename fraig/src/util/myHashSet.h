@@ -10,7 +10,6 @@
 #define MY_HASH_SET_H
 
 #include <vector>
-
 using namespace std;
 
 //---------------------
@@ -52,6 +51,29 @@ public:
    int getID()const{return location;}
    int geti1()const{return in1;}
    int geti2()const{return in2;}
+};
+
+class myFECgrps
+{
+   
+public:
+   int times=0;
+
+   size_t key;
+   vector<int>  grps;
+   friend class CirMgr;
+   myFECgrps(): key(0){}
+   myFECgrps(size_t KEY) : key(KEY) {}
+   size_t operator()()const{return key;}
+   bool operator==(const myFECgrps& k) const
+   {
+      return k.key == key;
+   }
+   bool operator<(const myFECgrps& k)const
+   {
+      return key < k.key;
+   }
+   void add(int a){grps.push_back(a);} 
 };
 
 

@@ -28,9 +28,57 @@ extern int printidxs;
 /**************************************/
 /*   class CirGate member functions   */
 /**************************************/
-// used at FANIN FANOUT
+
+
 void
 CirGate::reportGate() const
+{
+   cout << "================================================================================" << endl;
+   cout << "= ";
+   char z = getTypeStr();
+   if(z=='i')
+   {
+      cout << "PI(" << ID << ")";
+      if(!getSymbolicName().empty())
+         cout << "\"" << getSymbolicName() << "\"";
+   } 
+   else if(z=='a')
+      cout << "AIG(" << ID << ")";
+   else if(z=='o')
+   {
+      cout << "PO(" << ID << ")";
+      if(!getSymbolicName().empty())
+         cout << "\"" << getSymbolicName() << "\"";
+   }
+   else if(z=='0')
+      cout << "CONST(0)";
+   else if(z=='u')
+      cout << "UNDEF(" << ID << ")";
+   cout <<", line " << line << endl;
+   cout << "= FECs:";
+   
+   //print FECs:
+
+   cout << endl;
+   cout << "= Value: ";
+
+   
+   for(int i=63;i>=0;i--)
+   {
+      if(i% 8 == 7 && i!=63)
+         cout << "_";
+      cout << ((genResult() >> i) & 1U);
+   }
+   // print bitwisely.
+   cout << endl;
+   cout << "================================================================================" << endl;
+}
+
+
+
+// used at FANIN FANOUT
+void
+CirGate::myreportGate() const
 {
    char z = getTypeStr();
    if(z=='i')
@@ -56,7 +104,7 @@ CirGate::reportFanin(int level) const
       cirMgr->printFanin(ID,a,level,b);
    else
    {
-      reportGate();
+      myreportGate();
       cout << endl;
       a++;
       b++;
@@ -74,13 +122,15 @@ CirGate::reportFanout(int level) const
       cirMgr->printFanOut(ID,a,level,b,ID);
    else
    {
-      reportGate();
+      myreportGate();
       cout << endl;
    }
 }
 
 // This will print out the detail of the gate
 // Used at netlist-----------------------
+
+//--------------------AIG----------------------------//
 void
 CirAIGGate::printGate()const
 {
@@ -98,6 +148,23 @@ CirAIGGate::printGate()const
    return ;
 }
 
+size_t
+CirAIGGate::genResult()const
+{
+   if(in1 < 0 && in2 <0)
+      return ( ~sig1 & ~sig2);
+   if(in1 <0)
+      return (~sig1 & sig2);
+   if(in1 >0 && in2 < 0)
+      return (sig1 & ~sig2);
+   if(in1 > 0)
+      return (sig1 & sig2);
+}
+
+
+//--------------------AIG----------------------------//
+
+//********************PI*****************************//
 void
 CirPIGate::printGate()const
 {
@@ -107,10 +174,41 @@ CirPIGate::printGate()const
    return; 
 }
 
+size_t
+CirPIGate::genResult()const
+{
+   return this->inSig;
+}
+//********************PI*****************************//
+
+
+
+//********************0******************************//
 void
 Cir0Gate::printGate()const
 {
    cout << "CONST0";
    return;
 }
-// Used at netlist-----------------------
+
+
+size_t
+Cir0Gate::genResult()const
+{
+   return 0;
+}
+//********************0******************************//
+
+
+
+//********************PO*****************************//
+size_t
+CirPOGate::genResult()const
+{
+   if(in1 < 0)
+      return ~result;
+   return result;
+}
+//********************PO*****************************//
+
+

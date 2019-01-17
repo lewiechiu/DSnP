@@ -1,0 +1,24 @@
+cirread tests.fraig/sim11.aag
+
+cirsweep 
+cirsimu -f tests.fraig/pattern.11 -o myout.log
+
+
+cirgate 262
+cirgate 345
+cirgate 174
+cirgate 500
+cirgate 430
+cirgate 360
+cirgate 237
+cirgate 189
+cirgate 523
+cirgate 5
+cirgate 6
+cirgate 7
+cirgate 8
+cirgate 9
+cirgate 10
+
+usage
+q -f

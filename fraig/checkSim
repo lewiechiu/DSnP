@@ -1,0 +1,18 @@
+g++ cirgate.cpp -o fanoutGen
+./fanoutGen
+
+./td mytest.aag 200 1 10000 800
+./td tests.fraig/tre3.aag 10000 7000 10000 0
+./td tests.fraig/tre4.aag 10000 12000 10000 0
+./ref/fraig-linux18 -f testSima > a
+echo ======
+./fraig -f testSim > m
+echo ======
+echo Start Comparing
+
+./ref/fraig-linux18 -f read
+
+colordiff m a > d
+
+colordiff myout.log ansout.log > c
+

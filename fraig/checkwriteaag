@@ -1,0 +1,4 @@
+./fraig -f testwriteaag
+./ref/fraig-linux18 -f testwriteaagA
+colordiff my13.aag ans13.aag > d
+
